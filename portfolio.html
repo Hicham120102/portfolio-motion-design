@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Design — Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Space+Mono&display=swap');
+
+    :root {
+      --c1: #FF3CAC;
+      --c2: #784BA0;
+      --c3: #2B86C5;
+      --c4: #00F5D4;
+      --bg: #0b0b0f;
+      --surface: #14141c;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      padding: 120px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .gradient-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: drift 10s ease-in-out infinite alternate;
+    }
+    .blob1 { width: 500px; height: 500px; background: var(--c1); top: -150px; left: -100px; animation-duration: 12s; }
+    .blob2 { width: 400px; height: 400px; background: var(--c3); top: -100px; right: -80px; animation-duration: 9s; }
+    .blob3 { width: 300px; height: 300px; background: var(--c4); bottom: -80px; left: 40%; animation-duration: 14s; }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.08); }
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--c4);
+      border: 1px solid var(--c4);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1;
+      position: relative;
+      background: linear-gradient(135deg, #fff 0%, var(--c1) 50%, var(--c3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 20px;
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 300;
+      position: relative;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px 40px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid #2a2a3a;
+      transition: all 0.25s;
+    }
+    nav a:hover {
+      color: #fff;
+      border-color: var(--c1);
+      box-shadow: 0 0 20px rgba(255,60,172,0.25);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--c2), transparent);
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 80px 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--c1);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      margin-bottom: 48px;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #1e1e2e;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,60,172,0.2);
+    }
+
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .accent-pink   { background: linear-gradient(90deg, var(--c1), var(--c2)); }
+    .accent-blue   { background: linear-gradient(90deg, var(--c3), var(--c4)); }
+    .accent-purple { background: linear-gradient(90deg, var(--c2), var(--c1)); }
+    .accent-teal   { background: linear-gradient(90deg, var(--c4), var(--c3)); }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+      cursor: pointer;
+    }
+
+    .video-wrapper video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none; /* les clics passent au wrapper, pas à la vidéo */
+    }
+
+    /* Play button overlay */
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 1;
+      transition: opacity 0.25s;
+    }
+    .play-overlay.hidden { opacity: 0; pointer-events: none; }
+
+    .play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .play-btn svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
+    .play-btn:hover { transform: scale(1.1); background: rgba(255,60,172,0.4); }
+
+    .card-body {
+      padding: 20px 24px 24px;
+    }
+
+    .card-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--c4);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PLACEHOLDER CARD ── */
+    .card.placeholder {
+      border: 1px dashed #2a2a3a;
+      background: transparent;
+      cursor: default;
+    }
+    .card.placeholder:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .placeholder-inner {
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #333;
+    }
+    .placeholder-inner svg { width: 40px; height: 40px; stroke: #333; fill: none; }
+    .placeholder-inner p { font-size: 13px; letter-spacing: 1px; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #bbb;
+      margin-bottom: 16px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid;
+    }
+    .skill-tag:nth-child(3n+1) { color: var(--c1); border-color: var(--c1); }
+    .skill-tag:nth-child(3n+2) { color: var(--c4); border-color: var(--c4); }
+    .skill-tag:nth-child(3n+3) { color: var(--c3); border-color: var(--c3); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .stat-box {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 28px;
+      border: 1px solid #1e1e2e;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--c1), var(--c3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 60px;
+      text-align: center;
+      border: 1px solid #1e1e2e;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,60,172,0.12), transparent 60%);
+    }
+    .contact-box h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; position: relative; }
+    .contact-box p  { color: var(--muted); margin-bottom: 32px; position: relative; }
+    .btn-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,60,172,0.4);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #333;
+      font-size: 13px;
+      border-top: 1px solid #1a1a2a;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { padding: 80px 24px 60px; }
+      section { padding: 60px 24px; }
+      .grid  { grid-template-columns: 1fr; }
+      .contact-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="gradient-blob blob1"></div>
+    <div class="gradient-blob blob2"></div>
+    <div class="gradient-blob blob3"></div>
+    <div class="tag">Motion Design · Product</div>
+    <h1>Créations<br>en Mouvement</h1>
+    <p class="subtitle">Motion Designer Produit · Vidéos, animations & identités visuelles</p>
+  </header>
+
+  <nav>
+    <a href="#work">Projets</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="divider"></div>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-label">// Projets</div>
+    <div class="section-title">Travaux récents</div>
+
+    <div class="grid">
+
+      <!-- VIDEO 1 -->
+      <div class="card">
+        <div class="card-accent accent-pink"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video1.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · Produit</div>
+          <div class="card-title">Projet 01</div>
+          <div class="card-desc">Animation produit — mise en valeur visuelle et storytelling dynamique.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 2 -->
+      <div class="card">
+        <div class="card-accent accent-blue"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video2.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · Branding</div>
+          <div class="card-title">Projet 02</div>
+          <div class="card-desc">Identité en mouvement — animations de marque pour renforcer l'impact visuel.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 3 -->
+      <div class="card">
+        <div class="card-accent accent-purple"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video3.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · Publicité</div>
+          <div class="card-title">Projet 03</div>
+          <div class="card-desc">Spot publicitaire produit — énergie, rythme et esthétique soignée.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 4 -->
+      <div class="card">
+        <div class="card-accent accent-teal"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video4.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · 3D</div>
+          <div class="card-title">Projet 04</div>
+          <div class="card-desc">Animation 3D produit — rendu cinématique et transitions fluides.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 5 -->
+      <div class="card">
+        <div class="card-accent accent-pink"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video5.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · Produit</div>
+          <div class="card-title">Projet 05</div>
+          <div class="card-desc">Animation produit — mise en valeur visuelle et storytelling dynamique.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 7 — 3D Kinetic Punk (Artlist) -->
+      <div class="card">
+        <div class="card-accent accent-purple"></div>
+        <a href="https://artlist.io/video-templates/3d-kinetic-punk/1000234" target="_blank" style="display:block;position:relative;">
+          <div style="position:relative;padding-top:56.25%;overflow:hidden;background:#000;">
+            <img src="https://artlist-templates.imgix.net/jpg/049c68db-7435-4ca3-b625-1cf4d6139c5b-gradedThumbnail_w800px_22060acf-e9d9-494f-9e30-9271b46be63a_1748765181679.jpeg"
+                 alt="3D Kinetic Punk"
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85;" />
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.25);">
+              <div style="background:rgba(120,75,160,0.7);border:2px solid rgba(255,255,255,0.5);border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="white" style="margin-left:4px"><polygon points="5,3 19,12 5,21"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="card-category">Motion · 3D Kinetic</div>
+          <div class="card-title">3D Kinetic Punk</div>
+          <div class="card-desc">Template 3D cinétique — chaînes, verre, stickers & énergie punk. Compatible After Effects, Premiere Pro, Final Cut, DaVinci.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 6 -->
+      <div class="card">
+        <div class="card-accent accent-teal"></div>
+        <div class="video-wrapper" onclick="togglePlay(this)">
+          <video src="video6.mp4" loop preload="metadata"></video>
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Motion · Branding</div>
+          <div class="card-title">Projet 06</div>
+          <div class="card-desc">Identité en mouvement — animations de marque pour renforcer l'impact visuel.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">// À propos</div>
+        <div class="section-title">Motion Design<br>Produit</div>
+        <p>Je crée des animations qui donnent vie aux produits — du concept à la livraison finale, chaque image est pensée pour captiver et convertir.</p>
+        <p>Spécialisé dans la vidéo produit, le branding en mouvement et les spots publicitaires courts formats pour les marques e-commerce et digitales.</p>
+        <div class="skills-list">
+          <span class="skill-tag">After Effects</span>
+          <span class="skill-tag">Cinema 4D</span>
+          <span class="skill-tag">Premiere Pro</span>
+          <span class="skill-tag">DaVinci Resolve</span>
+          <span class="skill-tag">Blender</span>
+          <span class="skill-tag">Motion Graphics</span>
+          <span class="skill-tag">3D Product</span>
+          <span class="skill-tag">Color Grading</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Projets livrés</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Années d'expérience</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Clients satisfaits</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Créativité</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <h2>Travaillons ensemble</h2>
+      <p>Tu as un projet de vidéo produit, une campagne ou une animation à créer ?<br>Je suis disponible pour de nouvelles collaborations.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;">
+        <a href="mailto:ifocus.dxb@gmail.com" class="btn-cta">✉️ ifocus.dxb@gmail.com</a>
+        <a href="https://wa.me/33627576133" target="_blank" class="btn-cta" style="background:linear-gradient(135deg,#25D366,#128C7E);">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 — Motion Design Portfolio · Tous droits réservés</p>
+  </footer>
+
+  <script>
+    function togglePlay(wrapper) {
+      const video   = wrapper.querySelector('video');
+      const overlay = wrapper.querySelector('.play-overlay');
+
+      if (video.paused) {
+        // Mettre en pause toutes les autres vidéos
+        document.querySelectorAll('video').forEach(v => {
+          if (v !== video) {
+            v.pause();
+            v.closest('.video-wrapper').querySelector('.play-overlay').classList.remove('hidden');
+          }
+        });
+        // play() renvoie une promesse — on ignore les erreurs d'autoplay
+        video.play().catch(() => {});
+        overlay.classList.add('hidden');
+      } else {
+        video.pause();
+        overlay.classList.remove('hidden');
+      }
+    }
+
+    // Si la vidéo se met en pause toute seule (ex: visibilité), réafficher l'overlay
+    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+      wrapper.querySelector('video').addEventListener('pause', () => {
+        wrapper.querySelector('.play-overlay').classList.remove('hidden');
+      });
+      wrapper.querySelector('video').addEventListener('play', () => {
+        wrapper.querySelector('.play-overlay').classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
