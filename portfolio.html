@@ -81,7 +81,7 @@
 
     h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(48px, 8vw, 96px);
+      font-size: clamp(36px, 6vw, 72px);
       font-weight: 800;
       line-height: 1;
       position: relative;
@@ -198,13 +198,14 @@
       cursor: pointer;
     }
 
-    .video-wrapper video {
+    .video-wrapper video,
+    .video-wrapper img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      pointer-events: none; /* les clics passent au wrapper, pas à la vidéo */
+      pointer-events: none;
     }
 
     /* Play button overlay */
@@ -455,7 +456,7 @@
     <div class="gradient-blob blob2"></div>
     <div class="gradient-blob blob3"></div>
     <div class="tag">Motion Design · Product</div>
-    <h1>Créations<br>en Mouvement</h1>
+    <h1>Motion<br>Design</h1>
     <p class="subtitle">Motion Designer Produit · Vidéos, animations & identités visuelles</p>
   </header>
 
@@ -474,11 +475,11 @@
 
     <div class="grid">
 
-      <!-- VIDEO 1 -->
+      <!-- VIDEO 1 - ICED TEA -->
       <div class="card">
         <div class="card-accent accent-pink"></div>
         <div class="video-wrapper" onclick="openModal('video1.mp4')">
-          <video src="video1.mp4" preload="metadata" muted></video>
+          <img src="thumbnail1.png" alt="Projet 1">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -487,7 +488,7 @@
         </div>
         <div class="card-body">
           <div class="card-category">Motion · Produit</div>
-          <div class="card-title">Projet 01</div>
+          <div class="card-title">Projet 1</div>
           <div class="card-desc">Animation produit — mise en valeur visuelle et storytelling dynamique.</div>
         </div>
       </div>
@@ -496,7 +497,7 @@
       <div class="card">
         <div class="card-accent accent-blue"></div>
         <div class="video-wrapper" onclick="openModal('video2.mp4')">
-          <video src="video2.mp4" preload="metadata" muted></video>
+          <img src="thumbnail2.png" alt="Projet 2">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -514,7 +515,7 @@
       <div class="card">
         <div class="card-accent accent-purple"></div>
         <div class="video-wrapper" onclick="openModal('video3.mp4')">
-          <video src="video3.mp4" preload="metadata" muted></video>
+          <img src="thumbnail3.png" alt="Projet 3">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -532,7 +533,7 @@
       <div class="card">
         <div class="card-accent accent-teal"></div>
         <div class="video-wrapper" onclick="openModal('video4.mp4')">
-          <video src="video4.mp4" preload="metadata" muted></video>
+          <img src="thumbnail4.png" alt="Projet 4">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -550,7 +551,7 @@
       <div class="card">
         <div class="card-accent accent-pink"></div>
         <div class="video-wrapper" onclick="openModal('video5.mp4')">
-          <video src="video5.mp4" preload="metadata" muted></video>
+          <img src="thumbnail5.png" alt="Projet 5">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -568,7 +569,7 @@
       <div class="card">
         <div class="card-accent accent-teal"></div>
         <div class="video-wrapper" onclick="openModal('video6.mp4')">
-          <video src="video6.mp4" preload="metadata" muted></video>
+          <img src="thumbnail6.png" alt="Projet 6">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -586,7 +587,7 @@
       <div class="card">
         <div class="card-accent accent-pink"></div>
         <div class="video-wrapper" onclick="openModal('video7.mp4')">
-          <video src="video7.mp4" preload="metadata" muted></video>
+          <img src="thumbnail7.png" alt="Projet 7">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -596,7 +597,7 @@
         <div class="card-body">
           <div class="card-category">Motion · Produit</div>
           <div class="card-title">Projet 07 — Iced Tea</div>
-          <div class="card-desc">Produit animé — showcase élégant avec transitions fluides et présentation cinématique.</div>
+          <div class="card-desc">Animation produit — mise en valeur visuelle et storytelling dynamique.</div>
         </div>
       </div>
 
@@ -604,7 +605,7 @@
       <div class="card">
         <div class="card-accent accent-blue"></div>
         <div class="video-wrapper" onclick="openModal('video8.mp4')">
-          <video src="video8.mp4" preload="metadata" muted></video>
+          <img src="thumbnail8.png" alt="Projet 8">
           <div class="play-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -613,8 +614,8 @@
         </div>
         <div class="card-body">
           <div class="card-category">Motion · Mobile</div>
-          <div class="card-title">Projet 08 — Mobile Phone</div>
-          <div class="card-desc">Animation produit mobile — présentation dynamique avec focus sur les fonctionnalités clés.</div>
+          <div class="card-title">Projet 8</div>
+          <div class="card-desc">Animation produit — mise en valeur visuelle et storytelling dynamique.</div>
         </div>
       </div>
 
