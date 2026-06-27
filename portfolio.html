@@ -590,8 +590,8 @@
         <div class="carousel-item carousel-prev">
           <img src="thumbnail8.png" alt="Projet 8">
         </div>
-        <div class="carousel-item carousel-main">
-          <img src="thumbnail1.png" alt="Projet 1">
+        <div class="carousel-item carousel-main" onclick="openModal(carouselItems[carouselIndex].video)" style="cursor: pointer;">
+          <img src="screenshot1.png" alt="Projet 1">
           <div class="play-overlay-carousel">
             <div class="play-btn-carousel">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -706,14 +706,14 @@
     let touchEndX = 0;
 
     const carouselItems = [
-      { img: 'thumbnail1.png', num: 1 },
-      { img: 'thumbnail2.png', num: 2 },
-      { img: 'thumbnail3.png', num: 3 },
-      { img: 'thumbnail4.png', num: 4 },
-      { img: 'thumbnail5.png', num: 5 },
-      { img: 'thumbnail6.png', num: 6 },
-      { img: 'thumbnail7.png', num: 7 },
-      { img: 'thumbnail8.png', num: 8 },
+      { img: 'screenshot1.png', video: 'video1.mp4', num: 1 },
+      { img: 'screenshot2.png', video: 'video2.mp4', num: 2 },
+      { img: 'screenshot3.png', video: 'video3.mp4', num: 3 },
+      { img: 'screenshot4.png', video: 'video4.mp4', num: 4 },
+      { img: 'screenshot5.png', video: 'video5.mp4', num: 5 },
+      { img: 'screenshot6.png', video: 'video6.mp4', num: 6 },
+      { img: 'screenshot7.png', video: 'video7.mp4', num: 7 },
+      { img: 'screenshot8.png', video: 'video8.mp4', num: 8 },
     ];
 
     function carouselMove(direction) {
