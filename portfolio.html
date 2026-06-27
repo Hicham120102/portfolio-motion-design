@@ -374,6 +374,125 @@
       box-shadow: 0 12px 40px rgba(255,60,172,0.4);
     }
 
+    /* ── CAROUSEL FUTURISTE ── */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 60px auto 0;
+      perspective: 1000px;
+    }
+
+    .carousel-track {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      height: 350px;
+      position: relative;
+    }
+
+    .carousel-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      transition: all 0.4s ease;
+    }
+
+    .carousel-item.carousel-prev,
+    .carousel-item.carousel-next {
+      width: 140px;
+      height: 180px;
+      opacity: 0.5;
+      filter: blur(2px);
+      transform: scale(0.7);
+    }
+
+    .carousel-item.carousel-main {
+      width: 500px;
+      height: 300px;
+      opacity: 1;
+      filter: none;
+      box-shadow: 0 20px 80px rgba(255,60,172,0.3);
+      z-index: 10;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-overlay-carousel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 1;
+      transition: opacity 0.25s;
+    }
+
+    .carousel-main:hover .play-overlay-carousel {
+      background: rgba(0,0,0,0.5);
+    }
+
+    .play-btn-carousel {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .play-btn-carousel:hover {
+      transform: scale(1.1);
+      background: rgba(255,60,172,0.4);
+    }
+
+    .play-btn-carousel svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      margin-left: 4px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,60,172,0.2);
+      border: 1px solid rgba(255,60,172,0.5);
+      color: #fff;
+      font-size: 28px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 20;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,60,172,0.4);
+      box-shadow: 0 0 20px rgba(255,60,172,0.3);
+    }
+
+    .carousel-btn-left {
+      left: -80px;
+    }
+
+    .carousel-btn-right {
+      right: -80px;
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -455,9 +574,31 @@
     <div class="gradient-blob blob1"></div>
     <div class="gradient-blob blob2"></div>
     <div class="gradient-blob blob3"></div>
-    <div class="tag">Motion Design · Product</div>
     <h1>Motion<br>Design</h1>
     <p class="subtitle">Motion Designer Produit · Vidéos, animations & identités visuelles</p>
+
+    <!-- CAROUSEL FUTURISTE -->
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-item carousel-prev">
+          <img src="thumbnail8.png" alt="Projet 8">
+        </div>
+        <div class="carousel-item carousel-main">
+          <img src="thumbnail1.png" alt="Projet 1">
+          <div class="play-overlay-carousel">
+            <div class="play-btn-carousel">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item carousel-next">
+          <img src="thumbnail2.png" alt="Projet 2">
+        </div>
+      </div>
+
+      <button class="carousel-btn carousel-btn-left" onclick="carouselMove(-1)">‹</button>
+      <button class="carousel-btn carousel-btn-right" onclick="carouselMove(1)">›</button>
+    </div>
   </header>
 
   <nav>
@@ -705,6 +846,40 @@
     // Fermer avec Échap
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal(null, true);
+    });
+
+    // CAROUSEL
+    let carouselIndex = 0;
+    const carouselItems = [
+      { img: 'thumbnail1.png', num: 1 },
+      { img: 'thumbnail2.png', num: 2 },
+      { img: 'thumbnail3.png', num: 3 },
+      { img: 'thumbnail4.png', num: 4 },
+      { img: 'thumbnail5.png', num: 5 },
+      { img: 'thumbnail6.png', num: 6 },
+      { img: 'thumbnail7.png', num: 7 },
+      { img: 'thumbnail8.png', num: 8 },
+    ];
+
+    function carouselMove(direction) {
+      carouselIndex = (carouselIndex + direction + carouselItems.length) % carouselItems.length;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const prev = (carouselIndex - 1 + carouselItems.length) % carouselItems.length;
+      const main = carouselIndex;
+      const next = (carouselIndex + 1) % carouselItems.length;
+
+      document.querySelector('.carousel-prev img').src = carouselItems[prev].img;
+      document.querySelector('.carousel-main img').src = carouselItems[main].img;
+      document.querySelector('.carousel-next img').src = carouselItems[next].img;
+    }
+
+    // Navigation clavier
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') carouselMove(-1);
+      if (e.key === 'ArrowRight') carouselMove(1);
     });
   </script>
 </body>
